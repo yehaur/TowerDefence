@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>qt-tower.jpeg</file>
+    </qresource>
+</RCC>
