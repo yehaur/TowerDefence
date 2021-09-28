@@ -14,7 +14,7 @@ Bullet::Bullet(QGraphicsItem* parent){
 }
 
 void Bullet::move(){
-    int STEP_SIZE = 10;
+    int STEP_SIZE = 15;
     double theta = rotation();
 
     double dy = STEP_SIZE * qSin(qDegreesToRadians(theta));

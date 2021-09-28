@@ -2,5 +2,6 @@
     <qresource prefix="/images">
         <file>qt-tower.jpeg</file>
         <file>qt-bullet</file>
+        <file>qt-Enemy.png</file>
     </qresource>
 </RCC>
