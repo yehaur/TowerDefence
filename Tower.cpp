@@ -45,6 +45,11 @@ Tower::Tower(QGraphicsItem* parent):QObject(), QGraphicsPixmapItem(parent){
     timer->start(1000);
 }
 
+double distanceTo(QGraphicsItem* item){
+    QLineF ln(pos(), item->pos());
+    return ln.length();
+}
+
 void Tower::attack_target(){
     Bullet* bullet = new Bullet();
     bullet->setPos(x()+44,y()+44);
@@ -53,4 +58,27 @@ void Tower::attack_target(){
     int angle = -1*ln.angle();
     bullet->setRotation(angle);
     game->scene->addItem(bullet);
+}
+
+void Tower::acquire_target(){
+    // Get a list of all items within attack_area
+    QList<QGraphicsItem*> colliding_items = attack_area->collidingItems();
+
+    if(colliding_items.size() == 1){
+        has_target = false;
+        return;
+    }
+
+    double closest_dist = 300.0;
+    QPointF closest_pt = QPointF(0.0,0.0);
+    for(int i=0; i<colliding_items.size(); i++){
+        Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+        if(enemy){
+            double this_dist = distanceTo(enemy);
+            if(this_dist < closest_dist){
+                closest_dist = this_distance;
+                closest_pt = colliding_items[i]->pos();
+            }
+        }
+    }
 }
