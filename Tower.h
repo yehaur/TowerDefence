@@ -12,8 +12,8 @@ class Tower: public QObject, public QGraphicsPixmapItem{
 public:
     Tower(QGraphicsItem* parent=0);
     double distanceTo(QGraphicsItem* item);
+    void fire();
 public slots:
-    void attack_target();
     void acquire_target();
 private:
     QGraphicsPolygonItem* attack_area;

@@ -10,7 +10,7 @@ Enemy::Enemy(QGraphicsItem* parent){
 
     //set points
     //move down-right then right
-    points << QPointF(250,150) << QPointF(700, -250);
+    points << QPointF(250,150) << QPointF(400, 350);
     point_index = 0;
     dest = points[0];
     rotateToPoint(dest);
@@ -29,8 +29,9 @@ void Enemy::rotateToPoint(QPointF p){
 void Enemy::move_forward(){
     // if close to dest, rotate to next dest
     QLineF ln(pos(), dest);
-    if(ln.length()<5 && point_index<1){
+    if(ln.length()<5){
         point_index++;
+        if(point_index>=points.size()) return;
         dest = points[point_index];
         rotateToPoint(dest);
     }

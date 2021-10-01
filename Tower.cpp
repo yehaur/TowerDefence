@@ -7,6 +7,7 @@
 #include <QGraphicsRectItem>
 #include "Bullet.h"
 #include "Game.h"
+#include "Enemy.h"
 
 extern Game * game;
 
@@ -41,16 +42,16 @@ Tower::Tower(QGraphicsItem* parent):QObject(), QGraphicsPixmapItem(parent){
 
     // connect a timer to attack_target
     QTimer* timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(attack_target()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(acquire_target()));
     timer->start(1000);
 }
 
-double distanceTo(QGraphicsItem* item){
+double Tower::distanceTo(QGraphicsItem* item){
     QLineF ln(pos(), item->pos());
     return ln.length();
 }
 
-void Tower::attack_target(){
+void Tower::fire(){
     Bullet* bullet = new Bullet();
     bullet->setPos(x()+44,y()+44);
 
@@ -76,9 +77,13 @@ void Tower::acquire_target(){
         if(enemy){
             double this_dist = distanceTo(enemy);
             if(this_dist < closest_dist){
-                closest_dist = this_distance;
+                closest_dist = this_dist;
                 closest_pt = colliding_items[i]->pos();
+                has_target = true;
             }
         }
     }
+
+    attack_dest = closest_pt;
+    fire();
 }
