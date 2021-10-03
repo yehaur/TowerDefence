@@ -31,6 +31,7 @@ Tower::Tower(QGraphicsItem* parent):QObject(), QGraphicsPixmapItem(parent){
 
     //create the QGraphicsPolygonItem
     attack_area =  new QGraphicsPolygonItem(polygon, this);
+    attack_area->setPen(QPen(Qt::DotLine));
 
     // move the polygon
     QPointF poly_center(1.5, 1.5);
