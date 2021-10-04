@@ -11,6 +11,9 @@ Bullet::Bullet(QGraphicsItem* parent){
     QTimer* move_timer = new QTimer(this);
     connect(move_timer,SIGNAL(timeout()), this,SLOT(move()));
     move_timer->start(50);
+
+    maxRange = 100;
+    distanceTravalled = 0;
 }
 
 void Bullet::move(){

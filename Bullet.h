@@ -11,7 +11,13 @@ public:
     Bullet(QGraphicsItem* parent=0);
 public slots:
     void move();
+    double getMaxRange();
+    double getDistanceTravalled();
+    void setMaxRange(double&);
+    void setDistanceTravalled(double&);
 private:
+    double maxRange;
+    double distanceTravalled;
 };
 
 #endif // BULLET_H
