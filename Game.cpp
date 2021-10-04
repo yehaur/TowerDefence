@@ -1,9 +1,11 @@
 #include "Game.h"
 #include <QGraphicsScene>
-#include "Tower.h"
+#include "BrownTower.h"
 #include "Bullet.h"
 #include "Enemy.h"
-#include "BuildTowerIcon.h"
+#include "BuildBrownTowerIcon.h"
+#include "BuildGreenTowerIcon.h"
+#include "BuildRedTowerIcon.h"
 
 Game::Game(){
     // create a scene
@@ -21,7 +23,11 @@ Game::Game(){
 
     //set cursor
     cursor = NULL;
+    gcursor = NULL;
+    rcursor = NULL;
     build = NULL;
+    gbuild = NULL;
+    rbuild = NULL;
     setMouseTracking(true);
 
     setFixedSize(1000,800);
@@ -32,8 +38,20 @@ Game::Game(){
     Enemy* enemy = new Enemy();
     scene->addItem(enemy);
 
-    BuildTowerIcon* ic = new BuildTowerIcon();
-    scene->addItem(ic);
+    //BuildTowerIcon* ic = new BuildTowerIcon();
+    //scene->addItem(ic);
+
+    //test code
+    BuildBrownTowerIcon* bt = new BuildBrownTowerIcon();
+    scene->addItem(bt);
+
+    BuildGreenTowerIcon* gt = new BuildGreenTowerIcon();
+    gt->setPos(x(), y()+100);
+    scene->addItem(gt);
+
+    BuildRedTowerIcon* rt = new BuildRedTowerIcon();
+    rt->setPos(x(),y()+200);
+    scene->addItem(rt);
 }
 
 void Game::setCursor(QString filename){
@@ -45,6 +63,24 @@ void Game::setCursor(QString filename){
     cursor = new QGraphicsPixmapItem();
     cursor->setPixmap(QPixmap(filename));
     scene->addItem(cursor);
+
+    if(gcursor){
+        scene->removeItem(gcursor);
+        delete gcursor;
+    }
+
+    gcursor = new QGraphicsPixmapItem();
+    gcursor->setPixmap(QPixmap(filename));
+    scene->addItem(gcursor);
+
+    if(rcursor){
+        scene->removeItem(rcursor);
+        delete rcursor;
+    }
+
+    rcursor = new QGraphicsPixmapItem();
+    rcursor->setPixmap(QPixmap(filename));
+    scene->addItem(rcursor);
 }
 
 void Game::mousePressEvent(QMouseEvent* event){
@@ -56,10 +92,52 @@ void Game::mousePressEvent(QMouseEvent* event){
     scene->addItem(bullet);
     */
     if(build){
+        //return if the cursor is colliding with a existing tower
+        QList<QGraphicsItem*> items = cursor->collidingItems();
+        for(int i=0; i<items.size(); i++){
+            if(dynamic_cast<BrownTower*>(items[i]))
+                return;
+        }
+
+        // otherwise build at the clicked position
         scene->addItem(build);
         build->setPos(event->pos());
         cursor = NULL;
         build = NULL;
+    }else{
+        QGraphicsView::mousePressEvent(event);
+    }
+
+    if(gbuild){
+        //return if the cursor is colliding with a existing tower
+        QList<QGraphicsItem*> items = gcursor->collidingItems();
+        for(int i=0; i<items.size(); i++){
+            if(dynamic_cast<GreenTower*>(items[i]))
+                return;
+        }
+
+        // otherwise build at the clicked position
+        scene->addItem(gbuild);
+        gbuild->setPos(event->pos());
+        gcursor = NULL;
+        gbuild = NULL;
+    }else{
+        QGraphicsView::mousePressEvent(event);
+    }
+
+    if(rbuild){
+        //return if the cursor is colliding with a existing tower
+        QList<QGraphicsItem*> items = rcursor->collidingItems();
+        for(int i=0; i<items.size(); i++){
+            if(dynamic_cast<RedTower*>(items[i]))
+                return;
+        }
+
+        // otherwise build at the clicked position
+        scene->addItem(rbuild);
+        rbuild->setPos(event->pos());
+        rcursor = NULL;
+        rbuild = NULL;
     }else{
         QGraphicsView::mousePressEvent(event);
     }
@@ -68,5 +146,11 @@ void Game::mousePressEvent(QMouseEvent* event){
 void Game::mouseMoveEvent(QMouseEvent *event){
     if(cursor){
         cursor->setPos(event->pos());
+    }
+    if(gcursor){
+        gcursor->setPos(event->pos());
+    }
+    if(rcursor){
+        rcursor->setPos(event->pos());
     }
 }

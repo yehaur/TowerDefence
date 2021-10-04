@@ -25,3 +25,20 @@ void Bullet::move(){
 
     setPos(x()+dx, y()+dy);
 }
+
+double Bullet::getMaxRange(){
+    return maxRange;
+}
+
+double Bullet::getDistanceTravalled(){
+    return distanceTravalled;
+}
+
+void Bullet::setMaxRange(double &dist){
+    maxRange = dist;
+}
+
+void Bullet::setDistanceTravalled(double &distTravel){
+    distanceTravalled = distTravel;
+}
+

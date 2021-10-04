@@ -5,6 +5,9 @@
 #include <QMouseEvent>
 #include <QGraphicsPixmapItem>
 #include "Tower.h"
+#include "BrownTower.h"
+#include "GreenTower.h"
+#include "RedTower.h"
 
 class Game:public QGraphicsView{
 public:
@@ -16,7 +19,11 @@ public:
     //member attributes
     QGraphicsScene* scene;
     QGraphicsPixmapItem* cursor;
-    Tower* build;
+    QGraphicsPixmapItem* gcursor;
+    QGraphicsPixmapItem* rcursor;
+    BrownTower* build;
+    GreenTower* gbuild;
+    RedTower* rbuild;
 };
 
 #endif // GAME_H

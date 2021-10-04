@@ -42,9 +42,9 @@ Tower::Tower(QGraphicsItem* parent):QObject(), QGraphicsPixmapItem(parent){
     attack_area->setPos(x()+ln.dx(), y()+ln.dy());
 
     // connect a timer to attack_target
-    QTimer* timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(acquire_target()));
-    timer->start(1000);
+    //QTimer* timer = new QTimer();
+    //connect(timer, SIGNAL(timeout()), this, SLOT(acquire_target()));
+    //timer->start(1000);
 }
 
 double Tower::distanceTo(QGraphicsItem* item){

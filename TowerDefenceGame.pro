@@ -17,18 +17,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    BuildTowerIcon.cpp \
+    BrownTower.cpp \
+    BuildBrownTowerIcon.cpp \
+    BuildGreenTowerIcon.cpp \
+    BuildRedTowerIcon.cpp \
     Bullet.cpp \
     Enemy.cpp \
     Game.cpp \
+    GreenTower.cpp \
+    RedTower.cpp \
     Tower.cpp \
     main.cpp
 
 HEADERS += \
-    BuildTowerIcon.h \
+    BrownTower.h \
+    BuildBrownTowerIcon.h \
+    BuildGreenTowerIcon.h \
+    BuildRedTowerIcon.h \
     Bullet.h \
     Enemy.h \
     Game.h \
+    GreenTower.h \
+    RedTower.h \
     Tower.h
 
 # Default rules for deployment.

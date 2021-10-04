@@ -12,14 +12,13 @@ class Tower: public QObject, public QGraphicsPixmapItem{
 public:
     Tower(QGraphicsItem* parent=0);
     double distanceTo(QGraphicsItem* item);
-    void fire();
-public slots:
-    void acquire_target();
-private:
+    virtual void fire();
     QGraphicsPolygonItem* attack_area;
     QPointF attack_dest;
     bool has_target;
-
+public slots:
+    void acquire_target();
+private:
 };
 
 #endif // TOWER_H

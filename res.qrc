@@ -3,5 +3,10 @@
         <file>qt-tower.jpeg</file>
         <file>qt-bullet</file>
         <file>qt-Enemy.png</file>
+        <file>qi-browntower.jpeg</file>
+        <file>qt-greentower.jpeg</file>
+        <file>qt-greytower.jpeg</file>
+        <file>qt-3bullets.jpeg</file>
+        <file>qt-fireball.jpeg</file>
     </qresource>
 </RCC>
